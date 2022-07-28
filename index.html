@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Imports -->
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+
+    <!-- cont para rodar videos -->
+    <script>
+      AFRAME.registerComponent("controlador0", {
+        // ...
+        init: function () {
+          // Set up initial state and variables.
+          this.toggle = false;
+          this.vid = document.querySelector("#video1");
+          this.vid.pause();
+        },
+        tick: function () {
+          if (this.el.object3D.visible == true) {
+            if (!this.toggle) {
+              this.toggle = true;
+              this.vid.play();
+            }
+          } else {
+            this.toggle = false;
+            this.vid.pause();
+          }
+        },
+      });
+
+      AFRAME.registerComponent("controlador1", {
+        // ...
+        init: function () {
+          // Set up initial state and variables.
+          this.toggle = false;
+          this.vid = document.querySelector("#video2");
+          this.vid.pause();
+        },
+        tick: function () {
+          if (this.el.object3D.visible == true) {
+            if (!this.toggle) {
+              this.toggle = true;
+              this.vid.play();
+            }
+          } else {
+            this.toggle = false;
+            this.vid.pause();
+          }
+        },
+      });
+
+      AFRAME.registerComponent("controlador2", {
+        // ...
+        init: function () {
+          // Set up initial state and variables.
+          this.toggle = false;
+          this.vid = document.querySelector("#video3");
+          this.vid.pause();
+        },
+        tick: function () {
+          if (this.el.object3D.visible == true) {
+            if (!this.toggle) {
+              this.toggle = true;
+              this.vid.play();
+            }
+          } else {
+            this.toggle = false;
+            this.vid.pause();
+          }
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <!-- importando assets web, dizem que e melhor -->
+
+    <!-- ImageTargetSrc - é o arquivo onde contem as imagem para rastreio -->
+    <a-scene
+      mindar-image="imageTargetSrc: https://cdn.glitch.global/6232ffae-05d1-44fa-8076-7d37b6f22e29/targets%20(12).mind?v=1658925311673; 
+                    filterMinCF:0.1; 
+                    filterBeta: 10"
+      vr-mode-ui="enabled: true"
+      device-orientation-permission-ui="enabled: false"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+    >
+
+    <!-- Importando videos pela web -->
+      <a-assets>
+        <video
+          muted
+          id="video1"
+          preload="auto"
+          loop="true"
+          src="https://cdn.glitch.me/6232ffae-05d1-44fa-8076-7d37b6f22e29/cabovid.mp4?v=1658428771629"
+        ></video>
+        <video
+          muted
+          id="video2"
+          preload="auto"
+          loop="true"
+          src="https://cdn.glitch.me/6232ffae-05d1-44fa-8076-7d37b6f22e29/coolervid.mp4?v=1658428779523"
+        ></video>
+        <video
+          muted
+          id="video3"
+          preload="auto"
+          loop="true"
+          src="https://cdn.glitch.global/6232ffae-05d1-44fa-8076-7d37b6f22e29/ramvid.mp4?v=1658428783394"
+        ></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      
+      <!-- mindar-image-index="targetIndex"- é qual imagem ele vai buscar no target tipo uma lista como sao 3 imagens vai de 0 a 2 -->
+      <a-entity mindar-image-target="targetIndex: 0" controlador0>
+        <a-video
+          position="0 0 0"
+          height="1.5"
+          width="1"
+          rotation="0 0 0"
+          src="#video1"
+        >
+        </a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1" controlador1>
+        <a-video
+          position="0 0 0"
+          height="1.5"
+          width="1"
+          rotation="0 0 0"
+          src="#video2"
+        >
+        </a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2" controlador2>
+        <a-video
+          position="0 0 0"
+          height="1.5"
+          width="1"
+          rotation="0 0 0"
+          src="#video3"
+        >
+        </a-video>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
